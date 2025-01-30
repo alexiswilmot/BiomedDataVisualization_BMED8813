@@ -148,11 +148,22 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column aggregation='None' caption='Age (bin)' datatype='integer' name='[Age (bin)]' role='dimension' type='ordinal'>
+        <calculation class='bin' decimals='-1' formula='[Age]' peg='0' size='1.4' />
+      </column>
+      <column datatype='integer' name='[Age]' role='measure' type='quantitative' />
       <column datatype='real' name='[Medical Cost]' role='measure' type='quantitative' />
       <column datatype='string' name='[Smoker]' role='dimension' type='nominal' />
       <column caption='medical_costs.csv' datatype='table' name='[__tableau_internal_object_id__].[medical_costs.csv_E84EE5FD5E9A4DA3BAAC59B1F3AC36BD]' role='measure' type='quantitative' />
+      <column-instance column='[Medical Cost]' derivation='Attribute' name='[attr:Medical Cost:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Medical Cost]' derivation='Avg' name='[avg:Medical Cost:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Medical Cost]' derivation='Count' name='[cnt:Medical Cost:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[Medical Cost]' derivation='Count' name='[cnt:Medical Cost:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Medical Cost]' derivation='CountD' name='[ctd:Medical Cost:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[Medical Cost]' derivation='CountD' name='[ctd:Medical Cost:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Medical Cost]' derivation='Median' name='[med:Medical Cost:ok]' pivot='key' type='ordinal' />
       <column-instance column='[Smoker]' derivation='None' name='[none:Smoker:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Medical Cost]' derivation='Sum' name='[sum:Medical Cost:ok]' pivot='key' type='ordinal' />
       <column-instance column='[Medical Cost]' derivation='Sum' name='[sum:Medical Cost:qk]' pivot='key' type='quantitative' />
       <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
       <style>
@@ -173,7 +184,446 @@
               <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[avg:Medical Cost:qk]:1&quot;</bucket>
             </map>
             <map to='#f28e2b'>
+              <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[attr:Medical Cost:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[cnt:Medical Cost:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[ctd:Medical Cost:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
               <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[cnt:Medical Cost:ok]' type='palette'>
+            <map to='#499894'>
+              <bucket>31</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>52</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>44</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>10000</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>27</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>48</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>35</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>58</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>32</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>53</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>49</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>41</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>23</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>45</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>39</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>29</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>50</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>36</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>37</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>40</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>42</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>43</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>33</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>54</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>30</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>51</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>24</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>46</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>38</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>34</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>55</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>26</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>47</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[med:Medical Cost:ok]' type='palette'>
+            <map to='#499894'>
+              <bucket>31</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>52</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>44</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>10000</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>27</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>48</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>35</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>58</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>32</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>53</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>49</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>41</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>23</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>45</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>39</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>29</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>50</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>36</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>37</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>40</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>42</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>43</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>33</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>54</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>30</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>51</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>24</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>46</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>38</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>34</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>55</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>26</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>47</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[ctd:Medical Cost:ok]' type='palette'>
+            <map to='#499894'>
+              <bucket>31</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>52</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>44</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>9912</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>10000</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>27</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>48</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>35</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>58</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>32</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>53</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>49</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>41</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>23</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>45</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>39</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>29</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>50</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>36</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>37</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>40</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>42</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>43</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>33</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>54</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>30</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>51</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>24</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>46</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>38</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>34</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>55</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>26</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>47</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[sum:Medical Cost:ok]' type='palette'>
+            <map to='#499894'>
+              <bucket>31</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>52</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>44</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>9912</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>10000</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>27</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>48</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>35</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>58</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>32</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>53</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>49</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>41</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>23</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>45</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>39</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>29</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>50</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>36</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>37</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>40</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>42</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>43</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>33</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>54</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>30</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>51</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>24</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>46</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>38</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>34</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>55</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>26</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>47</bucket>
+            </map>
+          </encoding>
+          <encoding attr='shape' field='[sum:Medical Cost:ok]' type='shape'>
+            <map to='circle'>
+              <bucket>9912</bucket>
+            </map>
+            <map to='square'>
+              <bucket>118989322.15999985</bucket>
             </map>
           </encoding>
         </style-rule>
@@ -203,6 +653,98 @@
     </datasource>
   </datasources>
   <worksheets>
+    <worksheet name='Distribution of Medical Costs Across Ages'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='medical_costs' name='federated.03x422x1g5p2ew149dge507i9r80' />
+          </datasources>
+          <datasource-dependencies datasource='federated.03x422x1g5p2ew149dge507i9r80'>
+            <column aggregation='None' caption='Age (bin)' datatype='integer' name='[Age (bin)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='-1' formula='[Age]' peg='0' size='1.4' />
+            </column>
+            <column datatype='integer' name='[Age]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Medical Cost]' role='measure' type='quantitative' />
+            <column-instance column='[Age (bin)]' derivation='None' name='[none:Age (bin):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Age]' derivation='None' name='[none:Age:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Medical Cost]' derivation='Sum' name='[sum:Medical Cost:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.03x422x1g5p2ew149dge507i9r80].[none:Age:qk]' included-values='in-range'>
+            <min>18</min>
+            <max>65</max>
+          </filter>
+          <slices>
+            <column>[federated.03x422x1g5p2ew149dge507i9r80].[none:Age:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.03x422x1g5p2ew149dge507i9r80].[none:Age (bin):qk]' value='' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-color' value='#75a1c7' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]</rows>
+        <cols>[federated.03x422x1g5p2ew149dge507i9r80].[none:Age (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.03x422x1g5p2ew149dge507i9r80].[Age (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{EA68F1F4-4595-4E7D-B938-28E4037302D7}' />
+    </worksheet>
+    <worksheet name='Medical Costs by BMI'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='medical_costs' name='federated.03x422x1g5p2ew149dge507i9r80' />
+          </datasources>
+          <datasource-dependencies datasource='federated.03x422x1g5p2ew149dge507i9r80'>
+            <column datatype='real' name='[BMI]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Medical Cost]' role='measure' type='quantitative' />
+            <column-instance column='[BMI]' derivation='Sum' name='[sum:BMI:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Medical Cost]' derivation='Sum' name='[sum:Medical Cost:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='false' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.03x422x1g5p2ew149dge507i9r80].[sum:BMI:qk]' field-type='quantitative' scope='cols' type='space' />
+            <format attr='title' class='0' field='[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]' scope='rows' value='Medical Costs ($)' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-color' value='#f17b79' />
+                <format attr='size' value='0.29585635662078857' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]</rows>
+        <cols>[federated.03x422x1g5p2ew149dge507i9r80].[sum:BMI:qk]</cols>
+      </table>
+      <simple-id uuid='{B150F016-937D-4455-A9D3-B1172B4C4E6E}' />
+    </worksheet>
     <worksheet name='Proportion of Smokers vs. Non-Smokers by Region'>
       <table>
         <view>
@@ -262,7 +804,7 @@
             <style>
               <style-rule element='mark'>
                 <format attr='mark-labels-cull' value='true' />
-                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-show' value='false' />
               </style-rule>
             </style>
           </pane>
@@ -464,6 +1006,37 @@
       </table>
       <simple-id uuid='{9D9808BC-2687-4B14-9499-2DE24BDF1715}' />
     </worksheet>
+    <worksheet name='Sheet 6'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='medical_costs' name='federated.03x422x1g5p2ew149dge507i9r80' />
+          </datasources>
+          <datasource-dependencies datasource='federated.03x422x1g5p2ew149dge507i9r80'>
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.25' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols>[federated.03x422x1g5p2ew149dge507i9r80].[none:Region:nk]</cols>
+      </table>
+      <simple-id uuid='{F66D92EF-01A7-4268-B3F3-36769017017C}' />
+    </worksheet>
   </worksheets>
   <windows source-height='30'>
     <window class='worksheet' name='Sheet 1'>
@@ -497,7 +1070,7 @@
       </viewpoint>
       <simple-id uuid='{FC884D99-F335-4C9A-B9D5-261AD4700322}' />
     </window>
-    <window class='worksheet' maximized='true' name='Proportion of Smokers vs. Non-Smokers by Region'>
+    <window class='worksheet' name='Proportion of Smokers vs. Non-Smokers by Region'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -553,6 +1126,75 @@
         <zoom type='fit-height' />
       </viewpoint>
       <simple-id uuid='{0DF519E6-2FFE-4E49-9C20-921FC1079CDE}' />
+    </window>
+    <window class='worksheet' name='Distribution of Medical Costs Across Ages'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{112AAC65-F1CB-42D3-BD18-C1578819F367}' />
+    </window>
+    <window class='worksheet' name='Medical Costs by BMI'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{16CDC975-4A74-435E-BE49-5DBC64E788D7}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 6'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{5AED1348-8FF0-4A4F-A819-00DE813D4A65}' />
     </window>
   </windows>
 </workbook>
