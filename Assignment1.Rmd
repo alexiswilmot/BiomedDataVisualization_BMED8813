@@ -1,0 +1,173 @@
+---
+title: "8813_Assignment1"
+output: html_document
+date: "2025-01-09"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+getwd()
+setwd("/Users/ahuynh/downloads/8813/Assignment1")
+
+
+```{r Importing the data} 
+df <- read.csv("medical_costs.csv")
+df
+```
+  
+  
+``` {r Pie Chart: Proportion of Smokers vs. Non-Smokers}
+
+#------ Method 1
+# Count number of smokers and non-smokers
+count_smoker_y <- sum(df$Smoker == "yes")
+count_smoker_n <- sum(df$Smoker == "no")
+
+# Total count
+count_total <- count_smoker_y + count_smoker_n
+
+# Calculate percentages
+per_smoker_y <- (count_smoker_y / count_total) * 100
+per_smoker_n <- (count_smoker_n / count_total) * 100  # Fixed this line
+
+# Create named vector for pie chart
+smoker_count <- c(Yes = per_smoker_y, No = per_smoker_n)
+
+# Create the pie chart
+pie(smoker_percent, 
+    labels = paste(names(smoker_percent), round(smoker_percent, 2), "%"),
+    col = c("salmon", "skyblue"), 
+    main = "Proportion of Smokers vs. Non-Smokers")
+
+#------ Method 2
+# Count occurrences and compute proportions automatically
+smoker_count <- table(df$Smoker) # gets the count of each unique value
+smoker_percent <- prop.table(smoker_count) * 100  # Converts to percentages
+# prop.table() gets the proportion of each unique value
+
+# Create the pie chart
+pie(smoker_percent, 
+    labels = paste(names(smoker_percent), round(smoker_percent, 2), "%"),
+    col = c("salmon", "skyblue"), 
+    main = "Proportion of Smokers vs Non-Smokers")
+
+
+
+```
+
+``` {r Stacked Bar Plot: Proprtion and Count of Smoker by Region}
+
+#------ Stacked Bar Plo Proportion (Use position = fill)
+# Load necessary package
+library(ggplot2)
+
+# Create the stacked bar plot with proportions using position = "fill"
+ggplot(df, aes(x = Region, fill = Smoker)) +
+  geom_bar(position = "fill") +
+  labs(title = "Proprtion of Smokers vs. Non-Smokers by Region", 
+       x = "Region", 
+       y = "Proportion", 
+       fill = "Smoker") +
+  scale_fill_manual(values = c("salmon", "skyblue")) +  # Customize colors
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.01)) +  # Round to 2 decimal places
+  theme_minimal()  # Optional: cleaner plot theme
+
+#------ Stacked Bar Plot Proportion (Use position = stack)
+# Load necessary package
+library(ggplot2)
+
+# Create the stacked bar plot
+ggplot(df, aes(x = Region, fill = Smoker)) +
+  geom_bar(position = "stack") +
+  labs(title = "Count of Smokers vs. Non-Smokers by Region", 
+       x = "Region", 
+       y = "Count", 
+       fill = "Smoker") +
+  scale_fill_manual(values = c("salmon", "skyblue")) +  # Customize colors
+  theme_minimal()  # Optional: makes the plot look cleaner
+
+
+```
+
+``` {r Line Plot: Average Medical Costs by Age}
+
+# Calculate the average Medical.Costs by age
+df_avg_cost <- df %>%
+  group_by(Age) %>%
+  summarise(avg_costs = mean(Medical.Cost))
+
+# Create the line plot
+ggplot(df_avg_cost, aes(x = Age, y = avg_costs)) +
+  geom_line(color = "darkgreen") +  # Line plot
+  geom_point(color = "darkgreen") +   # Optional: Points on the line to show data points
+  labs(title = "Average Medical Costs by Age", 
+       x = "Age", 
+       y = "Average Medical Cost") +
+  theme_minimal()  # Optional: cleaner plot theme
+
+```
+
+``` {r Histogram: Distribution of Medical Costs Across Age}
+
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+# Summarize total medical costs by age
+df_total_costs <- df %>%
+  group_by(Age) %>%
+  summarise(total_medical_cost = sum(Medical.Cost, na.rm = TRUE))
+
+# Create a bar plot with total medical costs by age
+ggplot(df_total_costs, aes(x = Age, y = total_medical_cost)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(title = "Total Medical Costs by Age", 
+       x = "Age", 
+       y = "Total Medical Costs ($)") +
+  scale_y_continuous(labels = label_comma()) +  # Remove scientific notation
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels if needed
+
+
+
+```
+
+
+
+
+``` {r Scatter Plot: Medical Costs by BMI}
+
+# Load necessary libraries
+library(ggplot2)
+
+# Create a scatter plot
+ggplot(df, aes(x = BMI, y = Medical.Cost)) +
+  geom_point(color = "red", alpha = 0.7) +  # Points with color
+  labs(title = "Medical Costs by BMI", 
+       x = "BMI", 
+       y = "Medical Costs ($)") +
+  theme_minimal()
+
+```
+
+
+
+``` {R Box and Whisker Plot: Distribution of Medical Costs by Region}
+
+# Load necessary libraries
+library(ggplot2)
+
+# Create a box plot for medical costs by region
+ggplot(df, aes(x = Region, y = Medical.Cost)) +
+  geom_boxplot(fill = "skyblue", color = "black", alpha = 0.7) +  # Box plot elements
+  labs(title = "Distribution of Medical Costs by Region", 
+       x = "Region", 
+       y = "Medical Costs ($)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels if needed
+
+
+```
