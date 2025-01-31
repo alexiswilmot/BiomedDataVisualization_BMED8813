@@ -14,7 +14,6 @@ setwd("/Users/ahuynh/downloads/8813/Assignment1")
 
 ```{r Importing the data} 
 df <- read.csv("medical_costs.csv")
-df
 ```
   
   
@@ -33,7 +32,7 @@ per_smoker_y <- (count_smoker_y / count_total) * 100
 per_smoker_n <- (count_smoker_n / count_total) * 100  # Fixed this line
 
 # Create named vector for pie chart
-smoker_count <- c(Yes = per_smoker_y, No = per_smoker_n)
+smoker_percent <- c(Yes = per_smoker_y, No = per_smoker_n)
 
 # Create the pie chart
 pie(smoker_percent, 
@@ -75,8 +74,6 @@ ggplot(df, aes(x = Region, fill = Smoker)) +
   theme_minimal()  # Optional: cleaner plot theme
 
 #------ Stacked Bar Plot Proportion (Use position = stack)
-# Load necessary package
-library(ggplot2)
 
 # Create the stacked bar plot
 ggplot(df, aes(x = Region, fill = Smoker)) +
@@ -92,6 +89,8 @@ ggplot(df, aes(x = Region, fill = Smoker)) +
 ```
 
 ``` {r Line Plot: Average Medical Costs by Age}
+library(ggplot2)
+library(dplyr)
 
 # Calculate the average Medical.Costs by age
 df_avg_cost <- df %>%
@@ -110,11 +109,11 @@ ggplot(df_avg_cost, aes(x = Age, y = avg_costs)) +
 ```
 
 ``` {r Histogram: Distribution of Medical Costs Across Age}
-
 # Load necessary libraries
 library(dplyr)
 library(ggplot2)
 library(scales)
+
 
 # Summarize total medical costs by age
 df_total_costs <- df %>%
@@ -140,9 +139,6 @@ ggplot(df_total_costs, aes(x = Age, y = total_medical_cost)) +
 
 ``` {r Scatter Plot: Medical Costs by BMI}
 
-# Load necessary libraries
-library(ggplot2)
-
 # Create a scatter plot
 ggplot(df, aes(x = BMI, y = Medical.Cost)) +
   geom_point(color = "red", alpha = 0.7) +  # Points with color
@@ -156,9 +152,6 @@ ggplot(df, aes(x = BMI, y = Medical.Cost)) +
 
 
 ``` {R Box and Whisker Plot: Distribution of Medical Costs by Region}
-
-# Load necessary libraries
-library(ggplot2)
 
 # Create a box plot for medical costs by region
 ggplot(df, aes(x = Region, y = Medical.Cost)) +
