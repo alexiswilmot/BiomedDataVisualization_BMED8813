@@ -3,14 +3,18 @@
 <!-- build 20243.24.1211.0901                               -->
 <workbook original-version='18.1' source-build='2024.3.2 (20243.24.1211.0901)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
     <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
     <MarkAnimation />
     <ObjectModelEncapsulateLegacy />
     <ObjectModelTableType />
     <SchemaViewerObjectModel />
+    <SetMembershipControl />
     <SheetIdentifierTracking />
     <SortTagCleanup />
     <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
   </document-format-change-manifest>
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
@@ -162,6 +166,7 @@
       <column-instance column='[Medical Cost]' derivation='CountD' name='[ctd:Medical Cost:ok]' pivot='key' type='ordinal' />
       <column-instance column='[Medical Cost]' derivation='CountD' name='[ctd:Medical Cost:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Medical Cost]' derivation='Median' name='[med:Medical Cost:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[Medical Cost]' derivation='None' name='[none:Medical Cost:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Smoker]' derivation='None' name='[none:Smoker:nk]' pivot='key' type='nominal' />
       <column-instance column='[Medical Cost]' derivation='Sum' name='[sum:Medical Cost:ok]' pivot='key' type='ordinal' />
       <column-instance column='[Medical Cost]' derivation='Sum' name='[sum:Medical Cost:qk]' pivot='key' type='quantitative' />
@@ -191,6 +196,9 @@
             </map>
             <map to='#f28e2b'>
               <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[ctd:Medical Cost:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[none:Medical Cost:qk]&quot;</bucket>
             </map>
             <map to='#f28e2b'>
               <bucket>&quot;[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]&quot;</bucket>
@@ -681,6 +689,9 @@
         <style>
           <style-rule element='label'>
             <format attr='text-format' field='[federated.03x422x1g5p2ew149dge507i9r80].[none:Age (bin):qk]' value='' />
+            <format attr='font-size' field='[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]' value='15' />
+            <format attr='font-weight' field='[federated.03x422x1g5p2ew149dge507i9r80].[none:Age (bin):qk]' value='normal' />
+            <format attr='font-size' field='[federated.03x422x1g5p2ew149dge507i9r80].[none:Age (bin):qk]' value='15' />
           </style-rule>
         </style>
         <panes>
@@ -705,7 +716,79 @@
       </table>
       <simple-id uuid='{EA68F1F4-4595-4E7D-B938-28E4037302D7}' />
     </worksheet>
+    <worksheet name='Distribution of Medical Costs by Region'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontalignment='1'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='medical_costs' name='federated.03x422x1g5p2ew149dge507i9r80' />
+          </datasources>
+          <datasource-dependencies datasource='federated.03x422x1g5p2ew149dge507i9r80'>
+            <column datatype='real' name='[Medical Cost]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column-instance column='[Region]' derivation='Count' name='[cnt:Region:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Medical Cost]' derivation='None' name='[none:Medical Cost:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='field-labels'>
+            <format attr='font-size' value='16' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='font-size' field='[federated.03x422x1g5p2ew149dge507i9r80].[none:Medical Cost:qk]' value='14' />
+            <format attr='font-size' field='[federated.03x422x1g5p2ew149dge507i9r80].[none:Region:nk]' value='14' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='refboxplot'>
+            <format attr='boxplot-style' id='refline0' value='classic' />
+            <format attr='fill-color' id='refline0' value='#b7daf0fe' />
+            <format attr='whisker-end' id='refline0' value='none' />
+            <format attr='whisker-stroke-color' id='refline0' value='#000000' />
+            <format attr='whisker-stroke-size' id='refline0' value='1' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.03x422x1g5p2ew149dge507i9r80].[cnt:Region:qk]' />
+            </encodings>
+            <reference-line axis-column='[federated.03x422x1g5p2ew149dge507i9r80].[none:Medical Cost:qk]' boxplot-mark-exclusion='false' boxplot-whisker-type='standard' enable-instant-analytics='true' formula='average' id='refline0' label-type='automatic' probability='95' scope='per-cell' symmetric='false' value-column='[federated.03x422x1g5p2ew149dge507i9r80].[none:Medical Cost:qk]' z-order='1' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.14193369448184967' />
+                <format attr='mark-color' value='#75a1c7' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.03x422x1g5p2ew149dge507i9r80].[none:Medical Cost:qk]</rows>
+        <cols>[federated.03x422x1g5p2ew149dge507i9r80].[none:Region:nk]</cols>
+      </table>
+      <simple-id uuid='{F66D92EF-01A7-4268-B3F3-36769017017C}' />
+    </worksheet>
     <worksheet name='Medical Costs by BMI'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontname='Tableau Bold'>Medical Costs by BMI</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
@@ -724,6 +807,10 @@
             <encoding attr='space' class='0' domain-expand='false' field='[federated.03x422x1g5p2ew149dge507i9r80].[sum:BMI:qk]' field-type='quantitative' scope='cols' type='space' />
             <format attr='title' class='0' field='[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]' scope='rows' value='Medical Costs ($)' />
           </style-rule>
+          <style-rule element='label'>
+            <format attr='font-size' field='[federated.03x422x1g5p2ew149dge507i9r80].[sum:Medical Cost:qk]' value='14' />
+            <format attr='font-size' field='[federated.03x422x1g5p2ew149dge507i9r80].[sum:BMI:qk]' value='14' />
+          </style-rule>
         </style>
         <panes>
           <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
@@ -734,8 +821,8 @@
             <mark-sizing mark-sizing-setting='marks-scaling-off' />
             <style>
               <style-rule element='mark'>
-                <format attr='mark-color' value='#f17b79' />
                 <format attr='size' value='0.29585635662078857' />
+                <format attr='mark-color' value='#f17b79' />
               </style-rule>
             </style>
           </pane>
@@ -746,6 +833,13 @@
       <simple-id uuid='{B150F016-937D-4455-A9D3-B1172B4C4E6E}' />
     </worksheet>
     <worksheet name='Proportion of Smokers vs. Non-Smokers by Region'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontalignment='1'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
@@ -1006,38 +1100,77 @@
       </table>
       <simple-id uuid='{9D9808BC-2687-4B14-9499-2DE24BDF1715}' />
     </worksheet>
-    <worksheet name='Sheet 6'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='medical_costs' name='federated.03x422x1g5p2ew149dge507i9r80' />
-          </datasources>
-          <datasource-dependencies datasource='federated.03x422x1g5p2ew149dge507i9r80'>
-            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
-            <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
-          </datasource-dependencies>
-          <aggregation value='true' />
-        </view>
-        <style />
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Circle' />
-            <style>
-              <style-rule element='mark'>
-                <format attr='size' value='0.25' />
-              </style-rule>
-            </style>
-          </pane>
-        </panes>
-        <rows />
-        <cols>[federated.03x422x1g5p2ew149dge507i9r80].[none:Region:nk]</cols>
-      </table>
-      <simple-id uuid='{F66D92EF-01A7-4268-B3F3-36769017017C}' />
-    </worksheet>
   </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Dashboard 1'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='49000' id='3' name='Medical Costs by BMI' w='49200' x='50000' y='1000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='49000' id='5' name='Distribution of Medical Costs by Region' w='49200' x='800' y='50000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='49000' id='6' name='Distribution of Medical Costs Across Ages' w='49200' x='800' y='1000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='49000' id='7' type-v2='empty' w='49200' x='50000' y='50000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='3750' id='8' type-v2='text' w='26500' x='32700' y='625'>
+          <formatted-text>
+            <run>Medical Costs Between Ages, Region, and BMI</run>
+          </formatted-text>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='1' param='vert' type-v2='layout-flow' w='84000' x='8000' y='8000' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{CBA16DC1-1C3E-4202-9D85-8082BDAB8B2B}' />
+    </dashboard>
+  </dashboards>
   <windows source-height='30'>
     <window class='worksheet' name='Sheet 1'>
       <cards>
@@ -1173,7 +1306,7 @@
       </cards>
       <simple-id uuid='{16CDC975-4A74-435E-BE49-5DBC64E788D7}' />
     </window>
-    <window class='worksheet' maximized='true' name='Sheet 6'>
+    <window class='worksheet' name='Distribution of Medical Costs by Region'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1194,7 +1327,25 @@
           </strip>
         </edge>
       </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
       <simple-id uuid='{5AED1348-8FF0-4A4F-A819-00DE813D4A65}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Dashboard 1'>
+      <viewpoints>
+        <viewpoint name='Distribution of Medical Costs Across Ages'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Distribution of Medical Costs by Region'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Medical Costs by BMI'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='8' />
+      <simple-id uuid='{4DD246DE-064E-452F-9031-648F37C4BDCD}' />
     </window>
   </windows>
 </workbook>
