@@ -18,4 +18,14 @@ ggplot(avg_medical_age, aes(x=Age, y=cost)) +
   theme_minimal() + 
   theme(panel.grid.major = element_line(color = "gray"))
 
+ggplot(avg_medical_age, aes(x=Age, y=cost)) +
+  geom_histogram(color="black", fill = "lightblue") +
+  labs(title = "Average Medical Cost by Age", x = "Age", y = "Average Medical Cost") + 
+  theme_minimal() + 
+  theme(panel.grid.major = element_line(color = "gray"))
 
+
+
+
+bmi <- df$BMI
+avg_medical_bmi <- aggregate(cost ~ bmi, data = df, FUN= mode)
