@@ -1,0 +1,180 @@
+---
+title: "Assignment 3"
+author: "Angela Huynh"
+date: "2025-02-27"
+output: html_document
+---
+
+# clear all plots: 
+# try(dev.off(dev.list()["RStudioGD"]),silent=TRUE)
+# try(dev.off(),silent=TRUE)
+
+# clear environment:
+# rm(list=ls())
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(scales)
+data <- read.csv("diabetes.csv")
+
+# Color-blind-friendly color palette
+color_palette <- scale_fill_manual(values = c("#0072B2", "#D55E00"))
+
+```{r A: Distribution (histogram, bar, density plot)}
+# Distribution of Cholesterol levels
+
+data <- read.csv("diabetes.csv")
+
+plot1 <- ggplot(data, aes(x = chol)) +
+  geom_histogram(binwidth = 19.4, fill = "#0072B2", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of Cholesterol",
+       x = "Frequency",
+       y = "Cholesterol Level") +
+  theme_minimal()
+
+plot1 + geom_vline(aes(xintercept=mean(chol)),
+            color="blue", linetype="dashed", size=1)
+
+```
+library(ggplot2)
+install.packages(webr)
+library(webr)
+library(dplyr)
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("cardiomoon/moonBook")
+devtools::install_github("cardiomoon/webr")
+
+#----
+
+install.packages("ggiraphExtra")  # Install ggiraphExtra
+library(ggiraphExtra)
+library(dplyr)
+
+``` {r B: Proportion-based Donut Plot}
+
+library(ggiraphExtra)
+library(dplyr)
+
+data <- read.csv("diabetes.csv")
+
+data <- data %>% filter(frame != "") # removing empty values for frame
+
+PD <- data %>%
+  group_by(frame, gender) %>% #group_by to group by each unique combination of grame, gender; summarise 
+  summarise(count = n(), .groups = 'drop') # summarise() applies the mean(), min(), or max(), etc.; in this case gets the n() no. of rows
+  #.drop to make it a simple dataframe and not a grouped one
+
+PieDonut(PD, aes(gender, frame, count = count), title = "Frame Distribution within Gender")
+
+
+
+
+```
+
+
+```{r C: Associations - include line of best fit and coefficient correlation for line; line can be nonlinear }
+# Create a scatter plot
+data <- read.csv("diabetes.csv")
+ggplot(data, aes(x = age, y = chol)) +
+  geom_point(color = "red", alpha = 0.7) +  # Points with color
+  labs(title = "Cholestrol Levels against Age", 
+       x = "Age", 
+       y = "Cholestrol Levels") +
+  theme_minimal() +
+  geom_smooth(method = "lm") +
+  geom_text(x=82, y=285, label="Correlation: 0.22")
+
+cor(data$age, data$chol)
+
+```
+
+
+```{r D: Graph showing variable trend over age}
+
+# Calculate the average Medical.Costs by age
+
+data <- read.csv("diabetes.csv")
+
+df_avg_glyhb <- data %>%
+  group_by(age) %>%
+  summarise(avg_gly = mean(glyhb, na.rm = TRUE))
+
+# Create the line plot
+ggplot(df_avg_glyhb, aes(x = age, y = avg_gly)) +
+  geom_line(color = "darkgreen") +  # Line plot
+  geom_point(color = "darkseagreen") +   # Optional: Points on the line to show data points
+  labs(title = "Average Glycated Hemoglobin (Glyhb) by Age", 
+       x = "Age", 
+       y = "Glyhb") +
+  theme_minimal()  # optional: cleaner plot theme
+
+```
+
+colors() # getting available colors in R
+
+
+```{r E: Heamatp heatmap of chol, stab.glu, hdl, ratio, glyhb (y axis) as an increasing “age” of the patients in the x axis}
+
+# Assuming data is already loaded from "diabetes.csv"
+data <- read.csv("diabetes.csv")
+
+# Rescale the variables before reshaping the data
+data_scaled <- data %>% # scaled value represents the deviation from the mean in terms of standard deviations
+  mutate(
+    chol = scale(chol),
+    stab.glu = scale(stab.glu),
+    hdl = scale(hdl),
+    ratio = scale(ratio),
+    glyhb = scale(glyhb)
+  )
+
+# Reshape the data to long format for the heatmap
+data_long <- data_scaled %>%
+  select(age, chol, stab.glu, hdl, ratio, glyhb) %>%
+  gather(key = "variable", value = "value", chol, stab.glu, hdl, ratio, glyhb)
+
+# Create the heatmap
+ggplot(data_long, aes(x = age, y = variable, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = median(data_long$value, na.rm = TRUE)) +
+  theme_minimal() +
+  labs(title = "Heatmap of Patient Data",
+       x = "Age",
+       y = "Variable",
+       fill = "Scaled Value")
+ggplot
+
+
+```
+
+
+
+```{r F: Ridgeline plot using “location” col for distributions of chol, stab.glu, hdl, ratio, and glyhb using separate graphs for each}
+
+# install.packages("ggridges")
+library(ggridges)
+
+# Reshape the data to long format for ridgeline plots
+data_ridgeline <- data %>%
+  select(location, chol, stab.glu, hdl, ratio, glyhb) %>%
+  gather(key = "variable", value = "value", chol, stab.glu, hdl, ratio, glyhb)
+
+
+ggplot(data_ridgeline, aes(x = value, y = location, fill = location)) +
+  geom_density_ridges() +
+  facet_wrap(~ variable, scales = "free_x") +  # separate graphs for each variable
+  theme_minimal() +
+  labs(title = "Ridgeline Plot of Variables by Location",
+       x = "Value",
+       y = "Location")
+
+
+
+```
+
